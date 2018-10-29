@@ -5,19 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="main.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
   <script src="/bundle.js" defer></script>
 
   <title>Image Search</title>
 </head>
 
 <body>
-  <div id="root" style="padding-top: 30px">
+  <div id="root" class="rootClass" style="padding-top: 30px">
     <div id='ul'></div>
     <div id="buttons" style="text-align: center">
       <div id="next-Button">
-        <button type="button" id="prev-button" style="visibility: hidden">Previous</button>
-        <button type="button" id="next-button" style=>Next</button>
+        <button type="button" id="prev-button" style="visibility: hidden" class="btn btn-light">Previous</button>
+        <button type="button" id="next-button" class="btn btn-light">Next</button>
       </div>
     </div>
     <div id="modal">

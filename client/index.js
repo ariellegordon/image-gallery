@@ -31,29 +31,33 @@ const clickImage = image => {
 };
 
 const buildHTML = async () => {
-  let response = await fetch('api/');
-  let data = await response.json();
-  localStorageSet('images', JSON.stringify(data));
-  localStorageSet('start', '0');
-  localStorageSet('end', 10);
-  let [start, end] = getStartAndEnd();
-  const ulDiv = document.getElementById('ul');
-  ulDiv.style.textAlign = 'center';
-  const allImages = getImages();
-  let images = allImages.photos.photo.slice(start, end);
-  images.forEach(image => {
-    const img = document.createElement('img');
-    img.className = 'carousel-image';
-    img.src = `https://farm${image.farm}.staticflickr.com/${image.server}/${
-      image.id
-    }_${image.secret}_s.jpg`;
-    img.onclick = () => clickImage(image);
-    ulDiv.appendChild(img);
-  });
+  try {
+    let response = await fetch('api/');
+    let data = await response.json();
+    localStorageSet('images', JSON.stringify(data));
+    localStorageSet('start', '0');
+    localStorageSet('end', 10);
+    console.log(data);
+    let [start, end] = getStartAndEnd();
+    const ulDiv = document.getElementById('ul');
+    ulDiv.style.textAlign = 'center';
+    const allImages = getImages();
+    let images = allImages.photos.photo.slice(start, end);
+    images.forEach(image => {
+      const img = document.createElement('img');
+      img.className = 'carousel-image';
+      img.src = `https://farm${image.farm}.staticflickr.com/${image.server}/${
+        image.id
+      }_${image.secret}_s.jpg`;
+      img.onclick = () => clickImage(image);
+      ulDiv.appendChild(img);
+    });
+  } catch (e) {
+    console.error('Error displaying photos', e.message);
+  }
 };
 
-const nextButton = document.getElementById('next-button');
-nextButton.onclick = () => {
+const nextButtonClick = () => {
   let [oldStart, oldEnd] = getStartAndEnd();
   if (oldStart === 30) {
     nextButton.style.visibility = 'hidden';
@@ -79,6 +83,9 @@ nextButton.onclick = () => {
     ulDiv.appendChild(img);
   });
 };
+
+const nextButton = document.getElementById('next-button');
+nextButton.onclick = () => nextButtonClick();
 
 const prevButton = document.getElementById('prev-button');
 prevButton.onclick = () => {
@@ -106,3 +113,5 @@ prevButton.onclick = () => {
     ulDiv.appendChild(img);
   });
 };
+
+module.exports = { clickImage };
