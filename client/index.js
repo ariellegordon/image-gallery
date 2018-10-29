@@ -27,7 +27,20 @@ const clickImage = image => {
     image.id
   }_${image.secret}_z.jpg`;
   modal.appendChild(img);
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'close-button';
+  button.className = 'btn-btn-light';
+  button.innerText = 'Close';
+  button.onclick = () => clickClose();
+  modal.appendChild(button);
   modal.style.visibility = 'visible';
+};
+
+const clickClose = () => {
+  console.log('clicked');
+  const modal = document.getElementById('modal');
+  modal.style.visibility = 'hidden';
 };
 
 const buildHTML = async () => {
@@ -84,11 +97,7 @@ const nextButtonClick = () => {
   });
 };
 
-const nextButton = document.getElementById('next-button');
-nextButton.onclick = () => nextButtonClick();
-
-const prevButton = document.getElementById('prev-button');
-prevButton.onclick = () => {
+const prevButtonClick = () => {
   let [oldStart, oldEnd] = getStartAndEnd();
   if (oldStart === 10) {
     prevButton.style.visibility = 'hidden';
@@ -114,4 +123,8 @@ prevButton.onclick = () => {
   });
 };
 
-module.exports = { clickImage };
+const nextButton = document.getElementById('next-button');
+nextButton.onclick = () => nextButtonClick();
+
+const prevButton = document.getElementById('prev-button');
+prevButton.onclick = () => prevButtonClick();
