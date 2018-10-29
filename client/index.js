@@ -38,7 +38,6 @@ const clickImage = image => {
 };
 
 const clickClose = () => {
-  console.log('clicked');
   const modal = document.getElementById('modal');
   modal.style.visibility = 'hidden';
 };
@@ -50,7 +49,6 @@ const buildHTML = async () => {
     localStorageSet('images', JSON.stringify(data));
     localStorageSet('start', '0');
     localStorageSet('end', 10);
-    console.log(data);
     let [start, end] = getStartAndEnd();
     const ulDiv = document.getElementById('ul');
     ulDiv.style.textAlign = 'center';
