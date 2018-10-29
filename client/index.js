@@ -1,21 +1,8 @@
+const { localStorageSet, getImages, getStartAndEnd } = require('./utils');
+
 document.addEventListener('DOMContentLoaded', () => {
   buildHTML();
 });
-
-const localStorageSet = (item, value) => {
-  window.localStorage.setItem(item, value);
-};
-
-const getImages = () => {
-  return JSON.parse(window.localStorage.getItem('images'));
-};
-
-const getStartAndEnd = () => {
-  return [
-    +window.localStorage.getItem('start'),
-    +window.localStorage.getItem('end')
-  ];
-};
 
 const clickImage = image => {
   const modal = document.getElementById('modal');
@@ -35,11 +22,6 @@ const clickImage = image => {
   button.onclick = () => clickClose();
   modal.appendChild(button);
   modal.style.visibility = 'visible';
-};
-
-const clickClose = () => {
-  const modal = document.getElementById('modal');
-  modal.style.visibility = 'hidden';
 };
 
 const buildHTML = async () => {
@@ -119,6 +101,11 @@ const prevButtonClick = () => {
     img.onclick = () => clickImage(image);
     ulDiv.appendChild(img);
   });
+};
+
+const clickClose = () => {
+  const modal = document.getElementById('modal');
+  modal.style.visibility = 'hidden';
 };
 
 const nextButton = document.getElementById('next-button');
