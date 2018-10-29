@@ -12,10 +12,11 @@ describe('GET images', () => {
       )
       .reply(200, data);
   });
-  it('returns images', done => {
+  it('returns a object with images', done => {
     request.get('/api').end((err, res) => {
       expect(res.status).to.equal(200);
       expect(res.body).to.be.an('object');
+      expect(res.body.photos.photo).to.be.an.instanceOf(Array);
     });
     done();
   });
